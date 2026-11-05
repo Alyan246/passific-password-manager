@@ -1,51 +1,5 @@
-# pwman
+# Passific - Password Manager
 
-A local, encrypted command-line password manager written in Python.
+A local & encrypted password manager written in Python.
 
-> Early development. Not audited, so don't trust it with real secrets yet.
 
-## Design
-
-- **Key derivation:** Argon2id (`argon2-cffi`) turns the master password into a 256-bit key.
-- **Encryption:** AES-256-GCM (`cryptography`). KDF parameters are stored in the file header and authenticated as AAD, so tampering is detected.
-- **Storage:** a single encrypted file, by default `~/.local/share/pwman/vault.enc` (respects `$XDG_DATA_HOME`), written atomically with `0600` permissions.
-- A fresh salt and nonce are generated on every save.
-
-## Setup (Arch Linux)
-
-```bash
-sudo pacman -S --needed python python-pip git
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
-```
-
-## Usage
-
-```bash
-pwman init                      # create a new vault
-pwman add github -u alyan --generate
-pwman add email -u me@example.com   # prompts for the password
-pwman list
-pwman get github                # prints metadata, hides password
-pwman get github --show         # prints the password too
-pwman rm github
-pwman gen -l 24                 # generate a password without storing
-```
-
-Use `--vault PATH` (or `PWMAN_VAULT`) to point at a different vault file.
-
-## Tests
-
-```bash
-pytest
-```
-
-## Roadmap
-
-- [ ] Clipboard copy with auto-clear (`wl-copy` / `xclip`)
-- [ ] Edit entries, search, tags
-- [ ] Change master password
-- [ ] Export / import
-- [ ] Lock memory / zero secrets where feasible
-- [ ] TUI or GUI frontend
