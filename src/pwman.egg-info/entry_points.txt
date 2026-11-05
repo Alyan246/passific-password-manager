@@ -1,0 +1,2 @@
+[console_scripts]
+pwman = pwman.cli:main
