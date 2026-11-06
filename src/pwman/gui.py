@@ -1,9 +1,3 @@
-"""Minimal desktop UI for Passific (PySide6).
-
-Install the optional dependency first:  pip install -e ".[gui]"
-Run with:                               pwman gui
-"""
-
 from __future__ import annotations
 
 import sys
@@ -47,7 +41,7 @@ BUTTON = "#2d2d30"
 BUTTON_HOVER = "#363639"
 BUTTON_PRESSED = "#3e3e42"
 ACCENT = "#56913d"
-ACCENT_HOVER = "#4aa85b"
+ACCENT_HOVER = "#398046"
 ACCENT_PRESSED = "#558034"
 FOCUS = "#7ec86f"
 SELECTED = "#2e4734"
@@ -119,7 +113,7 @@ class MainWindow(QMainWindow):
         self.path = path
         self.master: str | None = None
         self.vault: Vault | None = None
-        self.current: str | None = None  # entry loaded in the form; None = new entry
+        self.current: str | None = None 
         self.creating = False
         self._baseline: tuple[str, ...] = ("",) * 5
         self._copied: str | None = None
@@ -142,7 +136,7 @@ class MainWindow(QMainWindow):
 
         self.show_unlock()
 
-    # ------------------------------------------------------------ unlock page
+    # unlock page
 
     def _build_unlock(self) -> QWidget:
         page = _panel("page")
@@ -233,7 +227,7 @@ class MainWindow(QMainWindow):
         self.lock_timer.start()
         self.name_edit.setFocus()
 
-    # -------------------------------------------------------------- main page
+    # main page
 
     def _build_main(self) -> QWidget:
         page = _panel("page")
@@ -273,7 +267,7 @@ class MainWindow(QMainWindow):
         self.pw_edit = QLineEdit(echoMode=QLineEdit.EchoMode.Password)
         self.notes_edit = QPlainTextEdit()
         self.show_btn = _button("Show")
-        # Fixed width so the field doesn't jump when the label flips Show/Hide.
+    
         fm = self.show_btn.fontMetrics()
         self.show_btn.setFixedWidth(
             max(fm.horizontalAdvance("Show"), fm.horizontalAdvance("Hide")) + 34
@@ -326,7 +320,7 @@ class MainWindow(QMainWindow):
         self.delete_btn.clicked.connect(self.delete)
         return page
 
-    # ----------------------------------------------------------- form helpers
+    # form helpers
 
     def _values(self) -> tuple[str, ...]:
         return (
@@ -405,7 +399,7 @@ class MainWindow(QMainWindow):
             return
         self._fill(item.text())
 
-    # ---------------------------------------------------------------- actions
+    # actions
 
     def new_entry(self, force: bool = False) -> None:
         if not force and not self._confirm_discard():
@@ -529,7 +523,7 @@ class MainWindow(QMainWindow):
         self._fill(None)
         self.show_unlock()
 
-    # ----------------------------------------------------------------- events
+    # events
 
     def eventFilter(self, obj: QObject, event: QEvent) -> bool:
         if self.vault is not None and event.type() in (

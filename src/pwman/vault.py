@@ -101,7 +101,7 @@ class Vault:
         return cls(entries)
 
 
-# ---------------------------------------------------------------- storage
+# storage
 
 
 def default_vault_path() -> Path:
@@ -130,7 +130,6 @@ def _atomic_write(path: Path, data: bytes) -> None:
         except FileNotFoundError:
             pass
         raise
-    # Best effort: persist the rename itself.
     try:
         dir_fd = os.open(path.parent, os.O_RDONLY)
         try:

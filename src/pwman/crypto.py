@@ -50,8 +50,7 @@ class KdfParams:
     parallelism: int = 4
 
     def validate(self) -> None:
-        # Bounds also protect against a crafted file that asks for absurd
-        # amounts of memory/time just by opening it.
+        # Bounds also protect against a crafted file that asks for absurd amounts of memory/time just by opening it.
         if not (1 <= self.time_cost <= 64):
             raise FormatError("KDF time_cost out of range")
         if not (1 <= self.parallelism <= 32):
@@ -122,5 +121,5 @@ def decrypt(password: str, blob: bytes) -> bytes:
         return AESGCM(key).decrypt(nonce, ciphertext, header)
     except InvalidTag:
         raise DecryptionError(
-            "wrong master password, or the vault file is corrupted"
+            "wrong master password, or corrupted vault file"
         ) from None

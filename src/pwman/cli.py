@@ -31,7 +31,7 @@ def _open(path: Path):
     return master, load_vault(path, master)
 
 
-# --------------------------------------------------------------- commands
+# commands
 
 
 def cmd_init(args: argparse.Namespace) -> int:
@@ -120,7 +120,7 @@ def cmd_gui(args: argparse.Namespace) -> int:
     return run(args.vault)
 
 
-# ----------------------------------------------------------------- parser
+# parser
 
 
 def build_parser() -> argparse.ArgumentParser:
