@@ -110,6 +110,16 @@ def cmd_gen(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_gui(args: argparse.Namespace) -> int:
+    try:
+        from .gui import run
+    except ImportError:
+        raise VaultError(
+            "the GUI needs PySide6; install it with: pip install -e '.[gui]'"
+        ) from None
+    return run(args.vault)
+
+
 # ----------------------------------------------------------------- parser
 
 
@@ -153,6 +163,8 @@ def build_parser() -> argparse.ArgumentParser:
     n.add_argument("-l", "--length", type=int, default=20)
     n.add_argument("--no-symbols", action="store_true")
     n.set_defaults(func=cmd_gen)
+
+    sub.add_parser("gui", help="open the desktop UI").set_defaults(func=cmd_gui)
 
     return p
 

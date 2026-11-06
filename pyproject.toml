@@ -15,6 +15,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+gui = ["PySide6-Essentials>=6.6"]
 
 [project.scripts]
 pwman = "pwman.cli:main"

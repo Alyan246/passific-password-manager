@@ -5,6 +5,7 @@ src/pwman/__main__.py
 src/pwman/cli.py
 src/pwman/crypto.py
 src/pwman/generator.py
+src/pwman/gui.py
 src/pwman/vault.py
 src/pwman.egg-info/PKG-INFO
 src/pwman.egg-info/SOURCES.txt
@@ -15,4 +16,5 @@ src/pwman.egg-info/top_level.txt
 tests/test_cli.py
 tests/test_crypto.py
 tests/test_generator.py
+tests/test_gui.py
 tests/test_vault.py

@@ -51,6 +51,16 @@ def test_create_refuses_to_overwrite(tmp_path):
         create_vault(path, MASTER, FAST)
 
 
+def test_search():
+    v = Vault()
+    v.add("GitHub", "alyan", "x", url="https://github.com")
+    v.add("email", "me@example.com", "x")
+    assert v.search("") == ["email", "GitHub"]
+    assert v.search("git") == ["GitHub"]
+    assert v.search("EXAMPLE") == ["email"]
+    assert v.search("nothing") == []
+
+
 def test_duplicate_and_overwrite_and_remove():
     v = Vault()
     v.add("a", "u", "p1")

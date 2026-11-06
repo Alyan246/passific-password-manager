@@ -38,6 +38,19 @@ class Vault:
     def names(self) -> list[str]:
         return sorted(self.entries, key=str.lower)
 
+    def search(self, query: str) -> list[str]:
+        """Names of entries whose name, username or url contains `query`."""
+        q = query.strip().lower()
+        if not q:
+            return self.names()
+        return [
+            n
+            for n in self.names()
+            if q in n.lower()
+            or q in self.entries[n].username.lower()
+            or q in self.entries[n].url.lower()
+        ]
+
     def get(self, name: str) -> Entry:
         try:
             return self.entries[name]
